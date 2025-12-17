@@ -8,7 +8,6 @@ yarn-error.log
 lerna-debug.log
 node_modules
 .vscode/*
-package-lock.json
 
 # TS build
 /build
@@ -20,6 +19,7 @@ coverage
 boilerplate/yarn.lock
 boilerplate/bun.lockb
 boilerplate/bun.lock
+boilerplate/pnpm-lock.yaml
 boilerplate/.gitignore.template
 
 # Test artifacts
@@ -42,6 +42,7 @@ test/artifacts/*
 # Ignore build artifacts
 .yarn/build-state.yml
 .yarn/install-state.gz
+
 
 # Dependency graph visualizations
 ignite-cli-dependency-graph.svg

@@ -5,7 +5,6 @@ import { spawnProgress } from "./spawn"
 // we really need a packager core extension on Gluegun
 // in the meantime, we'll use this hacked together version
 
-// Expo doesn't support pnpm, so we'll use yarn or npm
 export type PackagerName = "npm" | "yarn" | "pnpm" | "bun"
 type PackageOptions = {
   packagerName?: PackagerName
@@ -66,7 +65,7 @@ function availablePackagers(): PackagerName[] {
     packagers.push("yarn")
   }
   if (pnpmAvailable()) {
-    packagers.push("pnpm")
+    packagers.unshift("pnpm") // pnpm should be first in the list if it's available
   }
 
   if (bunAvailable()) {

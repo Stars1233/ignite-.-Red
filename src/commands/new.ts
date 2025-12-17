@@ -335,7 +335,7 @@ module.exports = {
 
     const availablePackagers = packager.availablePackagers()
     log(`availablePackagers: ${availablePackagers}`)
-    const defaultPackagerName = availablePackagers.includes("yarn") ? "yarn" : "npm"
+    const defaultPackagerName = availablePackagers.includes("pnpm") ? "pnpm" : "npm"
     let packagerName = getDefault(options.packager) ? defaultPackagerName : options.packager
 
     const validatePackagerName = (input: unknown): input is PackagerName =>
@@ -370,7 +370,7 @@ module.exports = {
       const packagerNameResponse = await prompt.ask<{ packagerName: PackagerName }>(() => ({
         type: "select",
         name: "packagerName",
-        message: "Which package manager do you want to use?",
+        message: "Which package manager do you want to use? (Note: we recommend pnpm)",
         choices: availablePackagers,
         initial,
         prefix,
@@ -655,6 +655,10 @@ module.exports = {
           write(path(targetPath, "yarn.lock"), "")
           // update the `packagerManager` field in `package.json
           await system.run(`yarn set version ${yarnVersion}`, { onProgress: log })
+        } else {
+          warning(
+            `We do not recommend using yarn v1 due to security and performance reasons. \nIf you do use yarn, we recommend using yarn v4 and making sure enableScripts is set to false in your .yarnrc.yml file.`,
+          )
         }
       }
 
